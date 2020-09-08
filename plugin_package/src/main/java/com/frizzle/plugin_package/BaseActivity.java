@@ -2,8 +2,10 @@ package com.frizzle.plugin_package;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 
@@ -62,6 +64,7 @@ public class BaseActivity extends Activity implements ActivityInterface {
         appActivity.startActivity(intentNew);
     }
 
+    //使用宿主的环境开始Service
     @Override
     public ComponentName startService(Intent intent){
         Intent intentNew = new Intent();
@@ -69,4 +72,15 @@ public class BaseActivity extends Activity implements ActivityInterface {
         return appActivity.startService(intentNew);
     }
 
+    //使用宿主的环境注册广播
+    @Override
+    public Intent registerReceiver(BroadcastReceiver receiver, IntentFilter filter) {
+        return appActivity.registerReceiver(receiver, filter);
+    }
+
+    //使用宿主环境发送广播
+    @Override
+    public void sendBroadcast(Intent intent) {
+        appActivity.sendBroadcast(intent);
+    }
 }

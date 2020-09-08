@@ -1,8 +1,10 @@
 package com.frizzle.myapplication;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.os.Bundle;
 
@@ -65,5 +67,18 @@ public class ProxyActivity extends Activity {
         Intent intent = new Intent(this, ProxyService.class);
         intent.putExtra("className",className);
         return super.startService(intent);
+    }
+
+    //注册广播
+    @Override
+    public Intent registerReceiver(BroadcastReceiver receiver, IntentFilter filter) {
+        String pluginReceiverName = receiver.getClass().getName();
+        return super.registerReceiver(new ProxyReceiver(pluginReceiverName), filter);
+    }
+
+    //发送广播,这里的接收者是代理的ProxyReceiver
+    @Override
+    public void sendBroadcast(Intent intent) {
+        super.sendBroadcast(intent);
     }
 }
