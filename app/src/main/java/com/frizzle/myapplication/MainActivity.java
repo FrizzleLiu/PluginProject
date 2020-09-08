@@ -68,6 +68,20 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        findViewById(R.id.btn_load_receiver).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PluginManager.getInstance(MainActivity.this).paserApkAction();
+            }
+        });
+        findViewById(R.id.btn_send_receiver).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setAction("plugin.static_receiver");
+                sendBroadcast(intent);
+            }
+        });
     }
 
     @Override

@@ -20,4 +20,15 @@
         android:layout_height="wrap_content"
         android:text="启动插件中的Activity" />
 
+    <Button
+        android:id="@+id/btn_load_receiver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="加载并注册插件包中的Receiver" />
+
+    <Button
+        android:id="@+id/btn_send_receiver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="发送广播-> 插件中的静态广播" />
 </LinearLayout>
