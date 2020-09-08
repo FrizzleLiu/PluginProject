@@ -57,26 +57,14 @@ public class MainActivity extends AppCompatActivity {
         btnLaunchPlugin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                //去插件包中的activitys
-//                File file = new File(Environment.getExternalStorageDirectory() + File.separator + "plugin.apk");
-//                String path = file.getAbsolutePath();
-//                PackageManager packageManager = getPackageManager();
-//                PackageInfo packageInfo = packageManager.getPackageArchiveInfo(path, PackageManager.GET_ACTIVITIES);
-//                ActivityInfo activityInfo = packageInfo.activities[0];
-//                Intent intent = new Intent(MainActivity.this, ProxyActivity.class);
-//                intent.putExtra("activityInfo",activityInfo.name);
-//                startActivity(intent);
+                //去插件包中的activitys
                 File file = new File(Environment.getExternalStorageDirectory() + File.separator + "plugin.apk");
                 String path = file.getAbsolutePath();
-
-                // 获取插件包 里面的 Activity
                 PackageManager packageManager = getPackageManager();
                 PackageInfo packageInfo = packageManager.getPackageArchiveInfo(path, PackageManager.GET_ACTIVITIES);
                 ActivityInfo activityInfo = packageInfo.activities[0];
-
-                // 占位  代理Activity
                 Intent intent = new Intent(MainActivity.this, ProxyActivity.class);
-                intent.putExtra("activityInfo", activityInfo.name);
+                intent.putExtra("className",activityInfo.name);
                 startActivity(intent);
             }
         });

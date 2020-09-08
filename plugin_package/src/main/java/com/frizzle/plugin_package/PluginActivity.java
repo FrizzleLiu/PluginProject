@@ -12,6 +12,7 @@ import android.widget.Toast;
 public class PluginActivity extends BaseActivity {
 
     private Button btnJump;
+    private Button btnLaunchService;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -22,10 +23,19 @@ public class PluginActivity extends BaseActivity {
         //插件包中的上下文必须使用宿主的上下文,因为插件包没有安装 所以是没有上下文环境的
         Toast.makeText(appActivity,"这是插件Activity",Toast.LENGTH_SHORT).show();
         btnJump = (Button) findViewById(R.id.jump);
+        btnLaunchService = (Button) findViewById(R.id.btn_launch_service);
         btnJump.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //启动插件中的Activity
                 startActivity(new Intent(appActivity,SecondActivity.class));
+            }
+        });
+        btnLaunchService.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //启动插件中的Service
+                startService(new Intent(appActivity,PluginService.class));
             }
         });
     }

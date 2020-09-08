@@ -2,6 +2,7 @@ package com.frizzle.plugin_package;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +17,8 @@ import com.frizzle.stander.ActivityInterface;
 public class BaseActivity extends Activity implements ActivityInterface {
     //宿主传进来的Activity
     public Activity appActivity;
+
+    //注入宿主的上下文
     @Override
     public void insertAppContext(Activity appActivity) {
         this.appActivity = appActivity;
@@ -55,7 +58,15 @@ public class BaseActivity extends Activity implements ActivityInterface {
 
     public void startActivity(Intent intent){
         Intent intentNew = new Intent();
-        intentNew.putExtra("className",intent.getComponent().getClassName());
+        intentNew.putExtra("className",intent.getComponent().getClassName());//PluginActivity的全类名
         appActivity.startActivity(intentNew);
     }
+
+    @Override
+    public ComponentName startService(Intent intent){
+        Intent intentNew = new Intent();
+        intentNew.putExtra("className",intent.getComponent().getClassName());//PluginService的全类名
+        return appActivity.startService(intentNew);
+    }
+
 }

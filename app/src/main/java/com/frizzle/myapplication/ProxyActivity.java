@@ -1,6 +1,7 @@
 package com.frizzle.myapplication;
 
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -32,7 +33,7 @@ public class ProxyActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String className = getIntent().getStringExtra("activityInfo");
+        String className = getIntent().getStringExtra("className");
         try {
             Class pluginActivityClass = getClassLoader().loadClass(className);
             //获取插件包中Activity的构造
@@ -54,7 +55,15 @@ public class ProxyActivity extends Activity {
     public void startActivity(Intent intent) {
         String className = intent.getStringExtra("className");
         Intent proxyIntent = new Intent(this, ProxyActivity.class);
-        proxyIntent.putExtra("activityInfo",className);//插件中的Activity的全类名
+        proxyIntent.putExtra("className",className);//插件中的Activity的全类名
         super.startActivity(proxyIntent);
+    }
+
+    @Override
+    public ComponentName startService(Intent service) {
+        String className = service.getStringExtra("className");
+        Intent intent = new Intent(this, ProxyService.class);
+        intent.putExtra("className",className);
+        return super.startService(intent);
     }
 }
