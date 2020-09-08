@@ -1,0 +1,4 @@
+include ':stander'
+include ':plugin_package'
+include ':app'
+rootProject.name = "PluginProject"
